@@ -2,29 +2,40 @@ package br.senac.rj.api.service;
 
 
 import br.senac.rj.api.model.Livro;
+import br.senac.rj.api.repository.LivroRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LivroService {
+private final LivroRepository livroRepository;
 
-
-    public LivroService(){
+    public LivroService(LivroRepository livroRepository){
+        this.livroRepository = livroRepository;
 
     }
 
     public List<Livro> listarLivros(){
-        List<Livro> livros = new ArrayList<>();
-        for (int i=0; i<10; i++){
-            Livro livro = new Livro();
-            livro.setCodigo(Long.valueOf(i+1));
-            livro.setTitulo("Titulo " + (i+1));
-            livro.setPreco(Double.valueOf(100 + (i+1)));
 
-            livros.add(livro);
-        }
-        return livros;
+        return this.livroRepository.findAll();
+    }
+public Livro incluirLivro(Livro livro){
+        return livroRepository.save(livro);
+
+}
+    public Optional<Livro> buscarLivroPorCodigo(Long codigo){
+
+        return this.livroRepository.findById(codigo);
+    }
+    public void excluirLivro(Long codigo){
+        this.livroRepository.deleteById(codigo);
+
+    }
+    public  Livro atualizarLivro(Long codigo, Livro livroAtualizado){
+        return null;
+
     }
 }

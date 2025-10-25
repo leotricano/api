@@ -1,34 +1,30 @@
 package br.senac.rj.api.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name="livros")
 public class Livro {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long codigo;
+    @Getter
+    @Setter
     private String titulo;
+    @Getter
+    @Setter
     private  Double preco;
 
-    public Livro() {
-    }
+    public Livro(String titulo , Double preco) {
 
-    public Long getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
         this.preco = preco;
     }
+public Livro(){
+
+}
+
 }
