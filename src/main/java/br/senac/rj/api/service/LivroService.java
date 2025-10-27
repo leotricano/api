@@ -34,8 +34,20 @@ public Livro incluirLivro(Livro livro){
         this.livroRepository.deleteById(codigo);
 
     }
+    public void excluirLivroAll(){
+        this.livroRepository.deleteAll();
+
+    }
     public  Livro atualizarLivro(Long codigo, Livro livroAtualizado){
-        return null;
+
+        Optional<Livro> livro = this.livroRepository.findById(codigo);
+        Livro livroAjustado = livro.get();
+        livroAjustado.setTitulo(livroAtualizado.getTitulo());
+        livroAjustado.setPreco(livroAtualizado.getPreco());
+
+
+
+        return this.livroRepository.save(livroAjustado);
 
     }
 }
