@@ -26,9 +26,14 @@ public Livro incluirLivro(Livro livro){
         return livroRepository.save(livro);
 
 }
-    public Optional<Livro> buscarLivroPorCodigo(Long codigo){
-
-        return this.livroRepository.findById(codigo);
+    public Livro buscarLivroPorCodigo(Long codigo){
+        String mensagem = "Livro com o codigo ["+codigo+"] não encontrado";
+        Optional<Livro> livro = this.livroRepository.findById(codigo);
+        if(livro.isEmpty()){
+            throw new RuntimeException(mensagem);
+        }
+         Livro l = livro.get();
+        return l;
     }
     public void excluirLivro(Long codigo){
         this.livroRepository.deleteById(codigo);
